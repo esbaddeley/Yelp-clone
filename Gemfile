@@ -9,6 +9,9 @@ end
 gem 'devise'
 # Adds user login
 
+gem 'paperclip'
+# For file uploads
+
 gem 'omniauth-facebook'
 # Facebook login
 
