@@ -36,6 +36,18 @@ Rails.application.configure do
   # Raises helpful error messages.
   config.assets.raise_runtime_errors = true
 
+  config.paperclip_defaults = {
+  :storage => :s3,
+  :bucket => ENV['S3_BUCKET_NAME'],
+  :s3_credentials => {
+    :s3_protocol => 'http',
+    :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+    :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY'],
+    :s3_host_name => 's3-eu-west-1.amazonaws.com'
+  }
+}
+
+
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
 end
