@@ -12,7 +12,9 @@
           <li>
             <%=review.thoughts%>, <strong><%= review.rating %></strong>/5
             <h4> Average rating: <%= star_rating(restaurant.average_rating.to_i) %></h4>
-            <%= link_to "Delete review", restaurant_review_path(restaurant, review), method: :delete %>
+            <h4> <%= pluralize review.endorsements.count, 'endorsement' %> </h4>
+            <%= link_to "Delete review", review_path(review), method: :delete %>
+            <%= link_to "Endorse review", review_endorsements_path(review), method: :post %>
           </li>
         <% end %>
       </ul>
