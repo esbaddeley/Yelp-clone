@@ -43,7 +43,7 @@ describe Restaurant, type: :model do
         expect(restaurant.average_rating).to eq 'N/A'
       end
 
-      context '1 review' do 
+      context '1 review' do
         it 'returns that rating' do
           restaurant = Restaurant.create(name: 'The Ivy')
           restaurant.reviews.create(rating: 4)
@@ -51,8 +51,17 @@ describe Restaurant, type: :model do
         end
       end
 
-  end
-  end
+      context 'multiple reviews' do
 
+        let(:restaurant) { Restaurant.create name: 'Test' }
 
+        it 'returns the average' do
+          restaurant.reviews.create(rating: 5)
+          place = restaurant.reviews.new(rating: 1)
+          place.save(validate: false)
+          expect(restaurant.average_rating).to eq 3
+        end
+      end
+    end
+  end
 end
