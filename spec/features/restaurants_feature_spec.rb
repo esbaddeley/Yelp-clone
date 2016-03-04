@@ -91,19 +91,32 @@ feature 'restaurants' do
       click_link('Sign out')
       user2_signup
       click_link('Edit pizza express')
-      expect(current_path).to eq('/restaurants')
+      fill_in 'Name', with: 'Kentucky Fried Chicken'
+      click_button 'Update Restaurant'
+      expect(page).to have_content('User can only edit his/her own restaurants')
     end
+
   end
 
   context 'deleting restaurants' do
-    before {Restaurant.create name: 'KFC'}
 
     scenario 'removes a restaurant when a user clicks a delete link' do
       visit '/restaurants'
       user_signup
-      click_link 'Delete KFC'
-      expect(page).not_to have_content 'KFC'
+      create_restaurant
+      click_link 'Delete pizza express'
+      expect(page).not_to have_content 'pizza express'
       expect(page).to have_content 'Restaurant deleted successfully'
+    end
+
+    scenario 'users can only delete restaurants they have created' do
+      visit('/')
+      user_signup
+      create_restaurant
+      click_link('Sign out')
+      user2_signup
+      click_link('Delete pizza express')
+      expect(page).to have_content('User can only delete his/her own restaurants')
     end
   end
 
