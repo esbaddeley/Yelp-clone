@@ -35,6 +35,16 @@ feature 'reviewing' do
     click_link 'Delete review'
     expect(page).to have_content 'so so'
     expect(page).to have_content "Only the owner can delete this review"
-  end 
+  end
+
+  scenario 'displays an everage rating for all reviews' do
+    visit '/restaurants'
+    user_signup
+    leave_review
+    click_link('Sign out')
+    user2_signup
+    leave_review2
+    expect(page).to have_content('Average rating: 4')
+  end
 
 end

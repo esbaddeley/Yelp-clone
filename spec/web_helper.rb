@@ -31,6 +31,6 @@ end
 def leave_review2
   click_link 'Review KFC'
   fill_in "Thoughts", with: "amazeballs"
-  select '3', from: 'Rating'
+  select '5', from: 'Rating'
   click_button 'Leave Review'
 end
